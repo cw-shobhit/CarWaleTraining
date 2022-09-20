@@ -1,0 +1,100 @@
+* {
+  padding: 0%;
+  margin: 0%;
+  font-family: "lotus", sans-serif;
+}
+label {
+  color: #8c8c8c;
+}
+form i {
+  position: absolute;
+  top: 54%;
+  left: 98%;
+  margin-left: -30px;
+  cursor: pointer;
+}
+.container {
+  /* margin-left: 25%;*/
+  padding-left: 25%;
+  padding-right: 25%;
+  display: flex;
+  justify-content: center;
+  /* margin-right: 0; */
+}
+body {
+  background-color: #d9d9d9;
+  height: 100vh;
+  width: 100vw;
+}
+
+#correct {
+  border: solid 2px green;
+}
+#incorrect {
+  border: solid 2px red;
+}
+
+/* Pop Up window settings */
+#modal {
+  background: whitesmoke;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  height: 30%;
+  padding: 20px;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  animation-name: animatemodal;
+  animation-duration: 0.4s;
+}
+
+#close-btn {
+  background-color: white;
+  width: 20%;
+  cursor: pointer;
+  font-size: 2rem;
+  color: #ff0000;
+}
+
+#modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-color: white;
+}
+
+@keyframes animatemodal {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 50%;
+    opacity: 1;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .container {
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+  #modal {
+    width: 50%;
+    font-size: 1rem;
+  }
+  #close-btn {
+    align-items: center;
+    width: 30%;
+    font-size: 1rem;
+  }
+}
