@@ -15,6 +15,37 @@ export default function App() {
   const [popUp, setPopUp] = useState(false);
   const [eye, setEye] = useState(false);
 
+  // handle functions
+
+  // handle the input fields states
+
+  const handleUname = (e) => {
+    setUname(e.target.value);
+    if (e.target.value.length <= 3 || e.target.value.length >= 25) {
+      setUnameStatus("false");
+    } else {
+      setUnameStatus("true");
+    }
+  };
+
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
+    if (!validateEmail(email)) {
+      setEmailStatus("false");
+    } else {
+      setEmailStatus("true");
+    }
+  };
+
+  const handlePass = (e) => {
+    setPass(e.target.value);
+    if (!validatePassword(pass)) {
+      setPassStatus("false");
+    } else {
+      setPassStatus("true");
+    }
+  };
+
   const handleTooglePassword = (e) => {
     if (eye === false) {
       setEye(true);
@@ -25,6 +56,21 @@ export default function App() {
       passwordRef.current.type = "password";
     }
   };
+
+  const handleCPass = (e) => {
+    setCPass(e.target.value);
+    if (
+      validatePassword(e.target.value) &&
+      pass.length === e.target.value.length &&
+      pass === e.target.value
+    ) {
+      setCpassStatus("true");
+    } else {
+      setCpassStatus("false");
+    }
+  };
+
+  // handle the submit
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -73,7 +119,7 @@ export default function App() {
   };
 
   function validatePassword(password) {
-    var regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d#$@!%&*?]{8,}$/;
+    var regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d#$@!%&*?]{7,}$/;
     if (!regex.test(password)) {
       return false;
     } else {
@@ -112,15 +158,20 @@ export default function App() {
                       ? "correct"
                       : "incorrect"
                   }
-                  onChange={(e) => setUname(e.target.value)}
+                  onChange={(e) => handleUname(e)}
                   value={uname}
                   className="form-control"
-                  required="true"
+                  required
                 />
                 <p
                   style={{
                     color: "red",
-                    display: unameStatus === "null" ? "none": (unameStatus==="true"?"none":"block")
+                    display:
+                      unameStatus === "null"
+                        ? "none"
+                        : unameStatus === "true"
+                        ? "none"
+                        : "block"
                   }}
                 >
                   Username must be between 3 and 25 characters.
@@ -141,15 +192,20 @@ export default function App() {
                       ? "correct"
                       : "incorrect"
                   }
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => handleEmail(e)}
                   value={email}
                   className="form-control"
-                  required="true"
+                  required
                 />
                 <p
                   style={{
                     color: "red",
-                    display: emailStatus === "null" ? "none": (emailStatus==="true"?"none":"block")
+                    display:
+                      emailStatus === "null"
+                        ? "none"
+                        : emailStatus === "true"
+                        ? "none"
+                        : "block"
                   }}
                 >
                   Enter valid email.
@@ -171,9 +227,9 @@ export default function App() {
                   }
                   type="password"
                   ref={passwordRef}
-                  onChange={(e) => setPass(e.target.value)}
+                  onChange={(e) => handlePass(e)}
                   className="form-control"
-                  required="true"
+                  required
                 />
                 <i
                   className={"bi " + (eye ? "bi-eye" : "bi-eye-slash")}
@@ -183,7 +239,12 @@ export default function App() {
                 <p
                   style={{
                     color: "red",
-                    display: passStatus === "null" ? "none": (passStatus==="true"?"none":"block")
+                    display:
+                      passStatus === "null"
+                        ? "none"
+                        : passStatus === "true"
+                        ? "none"
+                        : "block"
                   }}
                 >
                   Password must has at least 8 characters that include at least
@@ -206,14 +267,19 @@ export default function App() {
                       : "incorrect"
                   }
                   type="password"
-                  onChange={(e) => setCPass(e.target.value)}
+                  onChange={(e) => handleCPass(e)}
                   className="form-control"
-                  required="true"
+                  required
                 />
                 <p
                   style={{
                     color: "red",
-                    display: cpassStatus === "null" ? "none": (cpassStatus==="true"?"none":"block")
+                    display:
+                      cpassStatus === "null"
+                        ? "none"
+                        : cpassStatus === "true"
+                        ? "none"
+                        : "block"
                   }}
                 >
                   Please enter the password again
